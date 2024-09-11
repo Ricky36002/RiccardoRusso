@@ -19,16 +19,25 @@
 3. Ricovero
     3.1. Data di inizio del ricovero 
     3.2. Devono esistere abbastanza posti letto liberi per i ricoveri
-    3.3. Posto letto (v.req.4)
+    3.3. Posto letto (v. req. 4)
     3.4. Data di dimissione (se esiste)
-    3.5. Medico curante
+    3.5. Medico curante (v. req. 2)
 
 
 4. Posto letto 
-    4.1 Stanza(v. req. 5)
+    4.1 Stanza (v. req. 5)
 
 5. Stanza
+    5.1. Posti letto (minimo 1 massimo 8) (v. req. 4)
+    5.2. Piano (interno positivo)
+    5.3. Settore (iterno positivo)
+
+
+6. Poziente esterno 
+    6.1. Prestazioni richieste 
+
+7. Prestazione esterna
+    7.1. Medico
+    7.2. Specializzazione richiesta 
+    7.3. Descrizione 
     
-
-
-6. Settore
