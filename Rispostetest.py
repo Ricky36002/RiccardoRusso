@@ -58,3 +58,26 @@ def hypotenuse(a: float, b: float) -> float:
 
 
 #10)Domanda
+
+
+
+
+
+
+
+#coso zoo
+# Example usage
+#zoo = Zoo()
+#keeper = ZooKeeper(name="Lorenzo", surname="Maggi", id=1234)
+#zoo.add_zoo_keeper(keeper)
+
+#fence = Fence(area=100, temperature=25, habitat="Continent")
+#zoo.add_fence(fence)
+
+#animal1 = Animal(name="Scoiattolo", species="Blabla", age=25, height=0.5, width=0.2, preferred_habitat="Continent")
+#animal2 = Animal(name="Lupo", species="Lupus", age=14, height=1.0, width=0.5, preferred_habitat="Continent")
+
+#zoo.add_animal(animal1, fence)
+#zoo.add_animal(animal2, fence)
+
+#zoo.describe_zoo()
