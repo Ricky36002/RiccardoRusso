@@ -1,2 +1,1 @@
 git remote set-url main https://github.com/Ricky36002/RiccardoRusso.git
-git remote set-url main https://github.com/Ricky36002/Esercizi-casa.git
