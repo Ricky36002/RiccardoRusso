@@ -1,30 +1,51 @@
--- 1. Quanti sono gli strutturati di ogni fascia?
-select posizione
-from Persona
+select posizione, count(posizione)
+from persone
+group by posizione;
 
--- 2. Quanti sono gli strutturati con stipendio ≥ 40000?
-select nome
-from strutturati
-where stipendio >= 40000
--- 3. Quanti sono i progetti già finiti che superano il budget di 50000?
-select 
-from  progetti
-where budget 
--- 4. Qual è la media, il massimo e il minimo delle ore delle attività relative al progetto
--- ‘Pegasus’ ?
 
--- 5. Quali sono le medie, i massimi e i minimi delle ore giornaliere dedicate al progetto
--- ‘Pegasus’ da ogni singolo docente?
+select count(*)
+from persona
+where stipendio >= 40000;
 
--- 6. Qual è il numero totale di ore dedicate alla didattica da ogni docente?
 
--- 7. Qual è la media, il massimo e il minimo degli stipendi dei ricercatori?
+select count(*)
+from progetto
+where budget > 50000 and fine < CURRENT_DATE;
 
--- 8. Quali sono le medie, i massimi e i minimi degli stipendi dei ricercatori, dei professori
--- associati e dei professori ordinari?
 
--- 9. Quante ore ‘Ginevra Riva’ ha dedicato ad ogni progetto nel quale ha lavorato?
+select cast(avg(ap.oreDurata) as decimal(10,2)) as media, max(ap.oreDurata) as massimo, min(ap.oreDurata) as minimo
+from attivitaProgetto ap, progetto p
+where ap.progetto = p.id and p.nome = 'Pegasus';
 
--- 10. Qual è il nome dei progetti su cui lavorano più di due strutturati?
+select cast(avg(ap.oreDurata) as decimal(10,2)) as media, max(ap.oreDurata) as massimo, min(ap.oreDurata) as minimo
+from attivitaProgetto ap, progetto p
+where ap.progetto = p.id and p.nome = 'Pegasus';
 
--- 11. Quali sono i professori associati che hanno lavorato su più di un progetto?
+
+select u.id, u.nome, u.cognome, sum(anp.oreDurata) as ore_didattica
+from attivitaNonProgettuale anp, persona u
+where anp.tipo = 'Didattica' and anp.persona = u.id
+group by u.id;
+
+
+select cast(avg(stipendio) as decimal(10,2)) as media, max(stipendio) as massimo, min(stipendio) as minimo
+from persona
+where posizione = 'Ricercatore';
+
+
+select posizione, cast(avg(stipendio) as decimal(10,2)) as media, max(stipendio) as massimo, min(stipendio) as minimo
+from persona
+group by posizione;
+
+
+select p.id, p.nome, sum(ap.oreDurata) as totale_ore
+from progetto p, attivitaProgetto ap, persona u
+where ap.persona = u.id and u.nome = 'Ginevra' and u.cognome = 'Riva' and ap.progetto = p.id
+group by p.id;
+
+
+select p.id, p.nome
+from progetto p, attivitaProgetto ap, persona u
+where ap.persona = u.id and ap.progetto = p.id
+group by p.id
+having count(u.id)>2;
