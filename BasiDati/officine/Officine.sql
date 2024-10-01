@@ -57,28 +57,44 @@ create table Cliente(
     primary key (persona),
     foreign key (persona)  references Persona (cf)
 );
+create table Staff (
+    persona CodFis not null,
+    primary key (persona),
+    foreign key (persona) references Persona(cf)
+);
 
+create table Dipendente (
+    staff CodFis not null,
+    officina integer not null,
+    primary key (staff),
+    foreign key (officina) references Officina(id),
+);
 
+create table Direttore (
+    staff CodFis not null,
+    nascita date not null,
+    primary key (staff),
+    foreign key (staff) references Staff(persona)
+);
 
+create table Lavorare (
+    dipendente CodFis not null,
+    id Integer not null,
+    assunzione date not null,
+    primary key (dipendente, id),
+    foreign key (dipendente) references Dipendente(staff),
+    foreign key (officina) references Officina(id)
+);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-create table  Officina(
-    nome varchar(100) not null,
+create table Officina (
+    id Integer not null,
+    nome StringaM not null,
     indirizzo Indirizzo not null,
-    id integer not null,
-    primary key(id),
-    foreign key 
-)
+    direttore CodFis not null,
+    citta StringaM not null,
+    primary key (id),
+    foreign key (direttore) references Direttore(staff),
+    foreign key (citta) references Citta(nome, regione, nazione)
+);
+
+commit;
