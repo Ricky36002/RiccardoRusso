@@ -35,6 +35,7 @@ create table Citta (
     regione StringaM not null,
     nazione StringaM not null,
     primary key (nome, regione),
+    unique (nome, regione, nazione),
     foreign key (regione,nazione) references Regione(nome, nazione)
 );
 
@@ -60,7 +61,15 @@ create table Modello (
 create table Veicolo (
     targa Targa not null,
     immatricolazione integer not null,
+    cliente StringaM not null,create table Veicolo (
+    targa Targa not null,
+    immatricolazione integer not null,
     cliente StringaM not null,
+    modello StringaM not null,
+    primary key (targa),
+    foreign key (modello) references Modello(nome, marca),
+    foreign key (cliente) references Cliente(persona)
+);
     modello StringaM not null,
     primary key (targa),
     foreign key (modello) references Modello(nome, marca),
