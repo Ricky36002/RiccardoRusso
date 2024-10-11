@@ -2,8 +2,8 @@
     "dctnst34b56h501u": {
         "nome": "mario",
         "cognome": "de martino",
-        "data nascita": "21/05/1980",
-        "codice fiscale": "dctnst34b56h501u"
+        "dataNascita": "21/05/1980",
+        "codFiscale": "dctnst34b56h501u"
     },
     "dctnst34b56h501a": {
         "nome": "gianni",
@@ -29,10 +29,10 @@
         "data nascita": "24/02/1990",
         "codice fiscale": "aaaaa"
     },
-    "mrscrd46r34h501e": {
-        "nome": "Mario",
-        "cognome": "Rossi",
-        "data nascita": "13/04/1980",
-        "codice fiscale": "mrscrd46r34h501e"
+    "smnsmn22u02h501w": {
+        "nome": "Simone",
+        "cognome": "Simon",
+        "dataNascita": "22/10/2000",
+        "codFiscale": "smnsmn22u02h501w"
     }
 }
