@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio Form</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"], select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgb(10, 119, 13);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 90%;
+            opacity: 0.9;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: rgb(8, 95, 10);
+        }
+        .response {
+            margin-top: 20px;
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            font-size: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <form id="mainForm" method="POST" action="/mansendfile">
+        <h1>Form di Invio Dati</h1>
+        <hr>
+        <p>
+            <label for="opzione"><b>Scegli Opzione</b></label>
+            <select id="opzione" name="opzione" required>
+                <option value="">Seleziona Opzione</option>
+                <option value="opzione1">Crea una Favola</option>
+                <option value="opzione2">Rispondi a una Domanda</option>
+                <option value="opzione3">Analizza un'Immagine</option>
+            </select>
+        </p>
+        <div id="labels"></div>
+        <div>
+            <button type="submit" class="signup" id="submitButton" style="display: none;">Invia</button>
+        </div>
+    </form>
+
+    <div id="responseContainer" class="response" style="display: none;"></div>
+
+    <script>
+        const opzioneSelect = document.getElementById('opzione');
+        const labelsDiv = document.getElementById('labels');
+        const submitButton = document.getElementById('submitButton');
+        const responseContainer = document.getElementById('responseContainer');
+
+        opzioneSelect.addEventListener('change', (e) => {
+            const opzione = e.target.value;
+            labelsDiv.innerHTML = '';
+            responseContainer.style.display = 'none';
+
+            switch (opzione) {
+                case 'opzione1':
+                    labelsDiv.innerHTML = `
+                        <label for="label1"><b>Trama</b></label>
+                        <input type="text" placeholder="Inserisci la trama" name="label1" required>
+                    `;
+                    submitButton.style.display = 'block';
+                    break;
+
+                case 'opzione2':
+                    labelsDiv.innerHTML = `
+                        <label for="label2"><b>Domanda</b></label>
+                        <input type="text" placeholder="Fai una domanda" name="label2" required>
+                    `;
+                    submitButton.style.display = 'block';
+                    break;
+
+                case 'opzione3':
+                    labelsDiv.innerHTML = `
+                        <label for="label3"><b>Path Completo</b></label>
+                        <input type="text" placeholder="Inserisci path completo" name="label3" required>
+                        <label for="label4"><b>Domanda</b></label>
+                        <input style="margin-top: 10px" type="text" placeholder="Domanda per l'immagine" name="label4" required>
+                    `;
+                    submitButton.style.display = 'block';
+                    break;
+
+                default:
+                    submitButton.style.display = 'none';
+                    break;
+            }
+        });
+
+        document.getElementById('mainForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+            const formData = new FormData(event.target);
+
+            const response = await fetch(event.target.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            responseContainer.innerText = data.message;
+            responseContainer.style.display = 'block'; // Show response
+        });
+    </script>
+</body>
+</html>

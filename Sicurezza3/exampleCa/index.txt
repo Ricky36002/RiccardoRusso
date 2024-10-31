@@ -1,0 +1,1 @@
+V	251028100813Z		01	unknown	/CN=openGemini.it/C=IT/ST=Rome/O=Root Cert Authority/OU=openGemini.it/emailAddress=openGemini@gmail.com
