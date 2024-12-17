@@ -1,0 +1,9 @@
+Cliente (nome : StringaM, cognome: StringaM, email: Email)
+
+Prenotazione (istante_pren: Timestamp, istante_app: Timestamp, n_coperti: PostInteger, tipo: Tipo, istanteUt: Timestamp)
+
+Pormozione (nome : StringaM, sconto : Sconto, n_coperti: PostInteger)
+
+Ristorante (nome : StringaM, partitaIVA :StringaM)
+
+Vincoli 
