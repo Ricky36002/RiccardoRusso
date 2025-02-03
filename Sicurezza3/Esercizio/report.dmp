@@ -1,0 +1,49 @@
+Report  dei dati della NASA sui log: 
+Numero totale di richieste nel log: 1569898 
+ Numero totale di visite: 1549029 
+ Numero di richieste ignorate: 20869 
+ Numero di richieste analizzate correttamente: 1549029
+
+Top 10 IP/Domini: edams.ksc.nasa.gov: 6513 
+ piweba4y.prodigy.com: 4797 
+ 163.206.89.4: 4769 
+ piweba5y.prodigy.com: 4564 
+ piweba3y.prodigy.com: 4354 
+ www-d1.proxy.aol.com: 3862 
+ www-b2.proxy.aol.com: 3516 
+ www-b3.proxy.aol.com: 3431 
+ www-c5.proxy.aol.com: 3403 
+ www-b5.proxy.aol.com: 3381
+
+Top 10 Pagine: /images/NASA-logosmall.gif: 96841 
+ /images/KSC-logosmall.gif: 75132 
+ /images/MOSAIC-logosmall.gif: 66966 
+ /images/USA-logosmall.gif: 66594 
+ /images/WORLD-logosmall.gif: 65975 
+ /images/ksclogo-medium.gif: 62293 
+ /ksc.html: 43379 
+ /history/apollo/images/apollo-logo1.gif: 37748 
+ /images/launch-logo.gif: 35059 
+ /: 29850
+
+Top 10 Fasce Orarie: 15:52: 2086 
+ 15:51: 2063 
+ 12:53: 2033 
+ 12:52: 2029 
+ 15:32: 2016 
+ 15:30: 1974 
+ 12:49: 1965 
+ 14:53: 1962 
+ 15:53: 1955 
+ 15:43: 1942
+
+Top 10 IP sospetti: edams.ksc.nasa.gov: 6513 
+ piweba4y.prodigy.com: 4797 
+ 163.206.89.4: 4769 
+ piweba5y.prodigy.com: 4564 
+ piweba3y.prodigy.com: 4354 
+ www-d1.proxy.aol.com: 3862 
+ www-b2.proxy.aol.com: 3516 
+ www-b3.proxy.aol.com: 3431 
+ www-c5.proxy.aol.com: 3403 
+ www-b5.proxy.aol.com: 3381
