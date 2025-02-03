@@ -1,0 +1,339 @@
+{
+    "case_in_vendita": [
+        {
+            "catastale": "12350",
+            "indirizzo": "Via Milionario",
+            "numero_civico": "6",
+            "piano": 1,
+            "metri": 90,
+            "vani": 3,
+            "prezzo": 220000,
+            "stato": "OCCUPATO",
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "12351",
+            "indirizzo": "Via Romolo",
+            "numero_civico": "8",
+            "piano": 3,
+            "metri": 125,
+            "vani": 5,
+            "prezzo": 330000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "12352",
+            "indirizzo": "Via Firente",
+            "numero_civico": "7",
+            "piano": 2,
+            "metri": 95,
+            "vani": 4,
+            "prezzo": 270000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "12353",
+            "indirizzo": "Via Balo",
+            "numero_civico": "9",
+            "piano": 1,
+            "metri": 100,
+            "vani": 3,
+            "prezzo": 240000,
+            "stato": "OCCUPATO",
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "12354",
+            "indirizzo": "Via Terno",
+            "numero_civico": "11",
+            "piano": 3,
+            "metri": 115,
+            "vani": 4,
+            "prezzo": 310000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "12355",
+            "indirizzo": "Via Napoleone",
+            "numero_civico": "12",
+            "piano": 2,
+            "metri": 80,
+            "vani": 3,
+            "prezzo": 210000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "12356",
+            "indirizzo": "Via Palerno",
+            "numero_civico": "13",
+            "piano": 1,
+            "metri": 90,
+            "vani": 4,
+            "prezzo": 250000,
+            "stato": "OCCUPATO",
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "12357",
+            "indirizzo": "Via Gentile",
+            "numero_civico": "14",
+            "piano": 3,
+            "metri": 130,
+            "vani": 5,
+            "prezzo": 350000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "12358",
+            "indirizzo": "Via Fischia",
+            "numero_civico": "15",
+            "piano": 2,
+            "metri": 110,
+            "vani": 4,
+            "prezzo": 290000,
+            "stato": "LIBERO",
+            "filiale_proponente": "Filiale2"
+        }
+    ],
+    "case_in_affitto": [
+        {
+            "catastale": "67890",
+            "indirizzo": "Via Focene",
+            "numero_civico": "10",
+            "tipo_affitto": "TOTALE",
+            "piano": 1,
+            "metri": 200,
+            "vani": 5,
+            "bagno_personale": true,
+            "prezzo_mensile": 800,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67892",
+            "indirizzo": "Via Sentio",
+            "piano": 1,
+            "metri": 170,
+            "vani": 3,
+            "numero_civico": "30",
+            "tipo_affitto": "TOTALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 1000,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67893",
+            "indirizzo": "Via Padella",
+            "numero_civico": "40",
+            "tipo_affitto": "PARZIALE",
+            "piano": 1,
+            "metri": 90,
+            "vani": 2,
+            "bagno_personale": true,
+            "prezzo_mensile": 750,
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "67894",
+            "indirizzo": "Via Tornio",
+            "numero_civico": "20",
+            "piano": 2,
+            "metri": 140,
+            "vani": 4,
+            "tipo_affitto": "TOTALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 900,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67895",
+            "indirizzo": "Via Malto",
+            "numero_civico": "22",
+            "tipo_affitto": "PARZIALE",
+            "piano": 1,
+            "metri": 100,
+            "vani": 2,
+            "bagno_personale": false,
+            "prezzo_mensile": 650,
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "67896",
+            "indirizzo": "Via Renzo",
+            "numero_civico": "25",
+            "tipo_affitto": "TOTALE",
+            "piano": 1,
+            "metri": 190,
+            "vani": 5,
+            "bagno_personale": true,
+            "prezzo_mensile": 1100,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67897",
+            "indirizzo": "Via Faro",
+            "numero_civico": "30",
+            "piano": 3,
+            "metri": 200,
+            "vani": 6,
+            "tipo_affitto": "PARZIALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 800,
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "67898",
+            "indirizzo": "Via Niccolo",
+            "numero_civico": "35",
+            "piano": 1,
+            "metri": 110,
+            "vani": 3,
+            "tipo_affitto": "TOTALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 950,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67899",
+            "indirizzo": "Via Copernico",
+            "numero_civico": "40",
+            "piano": 1,
+            "metri": 150,
+            "vani": 2,
+            "tipo_affitto": "PARZIALE",
+            "bagno_personale": false,
+            "prezzo_mensile": 700,
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "67900",
+            "indirizzo": "Via Satuario",
+            "numero_civico": "45",
+            "piano": 2,
+            "metri": 90,
+            "vani": 2,
+            "tipo_affitto": "TOTALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 1150,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67901",
+            "indirizzo": "Via Svento",
+            "numero_civico": "50",
+            "piano": 3,
+            "metri": 180,
+            "vani": 4,
+            "tipo_affitto": "PARZIALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 750,
+            "filiale_proponente": "Filiale2"
+        },
+        {
+            "catastale": "67902",
+            "indirizzo": "Via Torre",
+            "numero_civico": "55",
+            "piano": 1,
+            "metri": 80,
+            "vani": 5,
+            "tipo_affitto": "TOTALE",
+            "bagno_personale": true,
+            "prezzo_mensile": 1200,
+            "filiale_proponente": "Filiale1"
+        },
+        {
+            "catastale": "67903",
+            "indirizzo": "Via Mitigare",
+            "numero_civico": "60",
+            "piano": 2,
+            "metri": 110,
+            "vani": 4,
+            "tipo_affitto": "PARZIALE",
+            "bagno_personale": false,
+            "prezzo_mensile": 650,
+            "filiale_proponente": "Filiale2"
+        }
+    ],
+    "filiali": [
+        {
+            "partita_iva": "IT12345678901",
+            "nome": "Filiale1",
+            "indirizzo_sede": "Via Torino",
+            "civico": "5",
+            "telefono": "0123456789"
+        },
+        {
+            "partita_iva": "IT98765432101",
+            "nome": "Filiale2",
+            "indirizzo_sede": "Via Milano",
+            "civico": "10",
+            "telefono": "0987654321"
+        }
+    ],
+    "vendite_casa": [
+        {
+            "catastale": "12345",
+            "data_vendita": "2025-01-01",
+            "filiale_proponente": "Filiale1",
+            "filiale_venditrice": "Filiale1",
+            "prezzo_vendita": 250000
+        },
+        {
+            "catastale": "12345",
+            "data_vendita": "2024-11-11",
+            "filiale_proponente": "F1",
+            "filiale_venditrice": "F2",
+            "prezzo_vendita": 250000.0
+        },
+        {
+            "catastale": "12346",
+            "data_vendita": "2024-11-12",
+            "filiale_proponente": "F1",
+            "filiale_venditrice": "F2",
+            "prezzo_vendita": 200000.0
+        },
+        {
+            "catastale": "12347",
+            "data_vendita": "2024-11-10",
+            "filiale_proponente": "F1",
+            "filiale_venditrice": "F2",
+            "prezzo_vendita": 300000.0
+        },
+        {
+            "catastale": "12348",
+            "data_vendita": "2024-11-09",
+            "filiale_proponente": "F1",
+            "filiale_venditrice": "F2",
+            "prezzo_vendita": 270000.0
+        },
+        {
+            "catastale": "12349",
+            "data_vendita": "2024-11-08",
+            "filiale_proponente": "Filiale1",
+            "filiale_venditrice": "Fililale2",
+            "prezzo_vendita": 290000.0
+        }
+    ],
+    "affitti_casa": [
+        {
+            "catastale": "67890",
+            "data_affitto": "2025-01-01",
+            "filiale_proponente": "Filiale1",
+            "filiale_venditrice": "Filiale1",
+            "prezzo_affitto": 800,
+            "durata_contratto": "12 mesi"
+        },
+        {
+            "catastale": "67891",
+            "data_affitto": "2024-11-16",
+            "filiale_proponente": "F1",
+            "filiale_venditrice": "F2",
+            "prezzo_affitto": 600.0,
+            "durata_contratto": "12"
+        }
+    ]
+}
