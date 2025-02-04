@@ -24,6 +24,7 @@ def estrai_informazioni(log_lines):
     fasce_orarie = defaultdict(int)  # {ora: numero_visite}
     frequenza_collegamenti = defaultdict(int)  # {ip: numero_collegamenti}
     potenziali_ip_sospetti = defaultdict(int)  # {ip: numero_collegamenti_per_minuto}
+    metodi_http = defaultdict(int)
     
     for line in log_lines:
         match = pattern.search(line)
@@ -68,6 +69,12 @@ def genera_report_compattato(file_path, numero_visite_totali, numero_righe_ignor
                           f"Numero di richieste ignorate: {numero_righe_ignorate} \n "
                           f"Numero di richieste analizzate correttamente: {numero_righe_analizzate}\n")
         
+        # Metodi HTTP
+        report_file.write("Distribuzione richieste HTTP:\n")
+        for metodo, conteggio in metodi_http.items():
+            report_file.write(f"{metodo}: {conteggio}\n")
+        report_file.write("\n")
+        
         # Top 10 IP/Domini con più richieste
         top_ips = sorted(visite_per_ip.items(), key=lambda x: x[1], reverse=True)[:10]
         top_ips_result = "\n" + "Top 10 IP/Domini: " + " \n ".join([f"{ip}: {richieste}" for ip, richieste in top_ips])
@@ -89,6 +96,9 @@ def genera_report_compattato(file_path, numero_visite_totali, numero_righe_ignor
             report_file.write("\n" + "Top 10 IP sospetti: " + " \n ".join([f"{ip}: {richieste}" for ip, richieste in top_sospetti]) + "\n")
         else:
             report_file.write("Top 10 IP sospetti: Nessuno trovato\n")
+
+
+    report_file.write(f"\n \n \n Conclusioni L'analisi evidenzia un elevato numero di richieste relative a loghi e immagini, suggerendo una forte presenza di accessi automatici o di caching da parte di browser e proxy. Gli IP più attivi coincidono con quelli considerati sospetti, il che potrebbe indicare traffico non del tutto legittimo o picchi di richieste anomale. Le fasce orarie più trafficate si concentrano nel primo pomeriggio, suggerendo possibili correlazioni con attività lavorative o di ricerca. Ulteriori analisi potrebbero essere necessarie per individuare eventuali anomalie o attività malevole nei dati raccolti.\n \n")
 
 # Funzione principale
 def main(file_path):

@@ -1,49 +1,94 @@
-Report  dei dati della NASA sui log: 
-Numero totale di richieste nel log: 1569898 
- Numero totale di visite: 1549029 
- Numero di richieste ignorate: 20869 
- Numero di richieste analizzate correttamente: 1549029
+Report dei dati della NASA sui log:
+Numero totale di richieste nel log: 1569898
+Indica il volume complessivo di richieste processate, fornendo un’idea della dimensione del dataset.
 
-Top 10 IP/Domini: edams.ksc.nasa.gov: 6513 
- piweba4y.prodigy.com: 4797 
- 163.206.89.4: 4769 
- piweba5y.prodigy.com: 4564 
- piweba3y.prodigy.com: 4354 
- www-d1.proxy.aol.com: 3862 
- www-b2.proxy.aol.com: 3516 
- www-b3.proxy.aol.com: 3431 
- www-c5.proxy.aol.com: 3403 
- www-b5.proxy.aol.com: 3381
+Numero totale di visite: 1553068
+Mostra il numero effettivo di richieste analizzabili dopo aver filtrato errori e richieste anomale.
 
-Top 10 Pagine: /images/NASA-logosmall.gif: 96841 
- /images/KSC-logosmall.gif: 75132 
- /images/MOSAIC-logosmall.gif: 66966 
- /images/USA-logosmall.gif: 66594 
- /images/WORLD-logosmall.gif: 65975 
- /images/ksclogo-medium.gif: 62293 
- /ksc.html: 43379 
- /history/apollo/images/apollo-logo1.gif: 37748 
- /images/launch-logo.gif: 35059 
- /: 29850
+Numero di richieste ignorate: 16830
+Segnala eventuali errori di parsing o righe di log corrotte, che potrebbero nascondere dati mancanti.
 
-Top 10 Fasce Orarie: 15:52: 2086 
- 15:51: 2063 
- 12:53: 2033 
- 12:52: 2029 
- 15:32: 2016 
- 15:30: 1974 
- 12:49: 1965 
- 14:53: 1962 
- 15:53: 1955 
- 15:43: 1942
+Numero di richieste analizzate correttamente: 1553068
+Garantisce che la maggior parte dei dati sia stata elaborata correttamente, permettendo un’analisi affidabile.
 
-Top 10 IP sospetti: edams.ksc.nasa.gov: 6513 
- piweba4y.prodigy.com: 4797 
- 163.206.89.4: 4769 
- piweba5y.prodigy.com: 4564 
- piweba3y.prodigy.com: 4354 
- www-d1.proxy.aol.com: 3862 
- www-b2.proxy.aol.com: 3516 
- www-b3.proxy.aol.com: 3431 
- www-c5.proxy.aol.com: 3403 
- www-b5.proxy.aol.com: 3381
+Distribuzione richieste HTTP:
+GET: 1549029
+POST: 77
+HEAD: 3962
+
+Aiuta a capire come gli utenti interagiscono con il sito. Un numero elevato di GET indica una navigazione standard,
+mentre molti POST potrebbero segnalare invii di dati o interazioni più complesse.
+Mostra che quasi tutte le richieste sono GET, suggerendo che la maggior parte del traffico riguarda il download di contenuti (es. immagini, pagine web).
+
+Top 10 IP/Domini:
+edams.ksc.nasa.gov: 6515
+piweba4y.prodigy.com: 4797
+163.206.89.4: 4769
+piweba5y.prodigy.com: 4564
+piweba3y.prodigy.com: 4354
+www-d1.proxy.aol.com: 3862
+www-b2.proxy.aol.com: 3516
+www-b3.proxy.aol.com: 3431
+www-c5.proxy.aol.com: 3403
+www-b5.proxy.aol.com: 3381
+
+Identifica gli utenti più attivi nel log. Se un IP compare frequentemente, potrebbe essere un bot, un proxy o un server cache.
+Si notano domini NASA e AOL Proxy: potrebbero essere accessi interni o richieste provenienti da un sistema di caching (es. AOL).
+
+
+Top 10 Pagine:
+/images/NASA-logosmall.gif: 97262
+/images/KSC-logosmall.gif: 75272
+/images/MOSAIC-logosmall.gif: 67345
+/images/USA-logosmall.gif: 66964
+/images/WORLD-logosmall.gif: 66340
+/images/ksclogo-medium.gif: 62659
+/ksc.html: 43594
+/history/apollo/images/apollo-logo1.gif: 37800
+/images/launch-logo.gif: 35112
+/: 30081
+
+Permette di capire quali risorse vengono richieste più spesso. Se la maggior parte del traffico riguarda immagini, potrebbe trattarsi di cache dei browser o bot che scaricano risorse statiche.
+Le immagini dei loghi dominano la classifica, suggerendo che molte richieste provengono da utenti che visualizzano pagine con contenuti grafici pesanti o bot che scaricano risorse statiche.
+
+
+Top 10 Fasce Orarie:
+15:52: 2093
+15:51: 2069
+12:52: 2055
+12:53: 2039
+15:32: 2017
+15:30: 1978
+12:49: 1971
+14:53: 1962
+15:53: 1961
+15:43: 1953
+
+Identifica i momenti di maggiore traffico, utili per analizzare il comportamento degli utenti e la possibile origine geografica.
+Il traffico si concentra nel pomeriggio (tra le 12:49 e le 15:53), suggerendo attività lavorative o di ricerca.
+
+
+Top 10 IP sospetti:
+edams.ksc.nasa.gov: 6515
+piweba4y.prodigy.com: 4797
+163.206.89.4: 4769
+piweba5y.prodigy.com: 4564
+piweba3y.prodigy.com: 4354
+www-d1.proxy.aol.com: 3862
+www-b2.proxy.aol.com: 3516
+www-b3.proxy.aol.com: 3431
+www-c5.proxy.aol.com: 3403
+www-b5.proxy.aol.com: 3381
+
+Mostra gli IP con il numero più alto di richieste, potenziali bot o attaccanti che potrebbero causare traffico anomalo.
+Gli IP più attivi coincidono con quelli nei Top IP/Domini, rafforzando l’ipotesi che proxy o bot stiano generando un numero elevato di richieste.
+
+
+
+Conclusioni:
+L'analisi evidenzia un elevato numero di richieste relative a loghi e immagini,
+ suggerendo una forte presenza di accessi automatici o di caching da parte di browser e proxy. 
+Gli IP più attivi coincidono con quelli considerati sospetti, il che potrebbe indicare traffico
+ non del tutto legittimo o picchi di richieste anomale. Le fasce orarie più trafficate si concentrano
+ nel primo pomeriggio, suggerendo possibili correlazioni con attività lavorative o di ricerca.
+ Ulteriori analisi potrebbero essere necessarie per individuare eventuali anomalie o attività malevole nei dati raccolti.
