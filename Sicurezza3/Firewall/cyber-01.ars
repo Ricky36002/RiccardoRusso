@@ -62,5 +62,12 @@ DEFINE VR "log"
         }}
   ;
 
+DEFINE VR "logback"
+  CONDITION
+      obs.event is net.recv
+  ACTION
+    REPORT pluto { CAT {"0: ", http.answer.code, " ",
+    http.answer.data} }
+;
 // "IP source: ", net.ipsrc ":[0-9]+" "", ". Port source: ",  net.ipsrc "[0-9.]+:" "", 
 //         "IP dst: ", net.ipdst ":[0-9]+" "", ". Port source: ",  net.ipdst "[0-9.]+:" "",

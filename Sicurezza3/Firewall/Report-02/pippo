@@ -1,0 +1,15 @@
+CAT{IP source: 127.0.0.1:34016
+IP dst: 127.0.0.1:61100
+Host: 127.0.0.1:61100, GET, /?what=init, 1738842921
+}|
+
+CAT{IP source: 172.21.68.6:55430
+IP dst: 172.17.0.2:30002
+Host: 172.21.68.6:8888, GET, /api?add1=10&add2=20&username=arcieri, 1738842928
+}|
+
+CAT{IP source: 127.0.0.1:50034
+IP dst: 127.0.0.1:61100
+Host: 127.0.0.1:61100, GET, /?what=init, 1738844152
+}|
+

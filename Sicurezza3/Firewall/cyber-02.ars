@@ -1,0 +1,54 @@
+
+
+//DEFINE ipset caso01_ip = { *.*.*.*:30002 };
+DEFINE ipset tuttigli_ip = {*.*.*.*:*}; 
+DEFINE set utenti_bloccati = { "arcieri" };
+
+DEFINE AR "user_bloccati"
+    CONDITION
+        http.query[username] is in utenti_bloccati
+    ACTION
+        ANSWER "<p> Errore 401, Utente bloccato<p>";
+
+
+
+
+
+DEFINE AR "Caso01Bloccati"
+    CONDITION
+       net.ipdst is in caso01_ip,
+       http.query[username] is in utenti_bloccati,
+    ACTION
+        TCP.REDIRECT "172.21.68.6:3000"
+    ;
+//Pozzo nero
+DEFINE AR "Il Resto"
+    CONDITION
+      net.ipdst is in tuttigli_ip
+    ACTION
+        ANSWER "<h1>Sito in allestimento</h1>"
+    ;
+
+DEFINE VR "log"
+  CONDITION
+      obs.event is net.send
+  ACTION
+        REPORT pippo { 
+      CAT { 
+        "IP source: ", net.ipsrc, "\n",
+        "IP dst: ", net.ipdst, "\n",
+        "Host: ", http.host, ", ", http.method, ", ", http.uri, ", ", OBS.TIME, 
+        "\n"
+        }}
+  ;
+DEFINE VR "logback"
+  CONDITION
+      obs.event is net.recv
+  ACTION
+    REPORT pluto { CAT {"0: ", http.answer.code, " ",
+    http.answer.data} }
+;
+
+        // "IP source: ", net.ipsrc ":[0-9]+" "", ". Port source: ",  net.ipsrc "[0-9.]+:" "", 
+        // "IP dst: ", net.ipdst ":[0-9]+" "", ". Port source: ",  net.ipdst "[0-9.]+:" "",
+
