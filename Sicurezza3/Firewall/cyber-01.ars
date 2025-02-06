@@ -1,0 +1,66 @@
+(* /*
+Sia dato un sistema di servizi WEB.
+Costruire un insieme di regole che:
+- caso01: per tutti gli indirizzi IP del server e
+  per la porta 8080 consentano
+  l'accesso alle pagine del sottoalbero /sito01/
+  del server mioserver
+
+- caso02: per tutti gli indirizzi IP del server e 
+  per la porta 80 consentano
+  l'accesso alle pagine del sottoalbero /sito02
+  del server mioserver
+
+- In via temporanea, in attesa del completamento
+  del sito per tutte le richieste su pagine
+  differenti rispondere con 
+  il messaggo "sito in allestimento"
+*/ *)
+
+DEFINE ipset caso01_ip = {*.*.*.*:30002}; //Se metti il firewall allora devi commentare o togliere alcune regole"net.ipdst is in caso01_ip" --> //Se invece metti 30002 
+DEFINE ipset caso02_ip = {*.*.*.*:30003}; //Se metti il firewall allora devi commentare o togliere alcune regole"net.ipdst is in caso02_ip" -->
+DEFINE ipset tuttigli_ip = {*.*.*.*:*};
+
+DEFINE urlset caso01_url = { /Sito-01, /Sito-01*, /Sito-01/*/ }; // */
+DEFINE urlset caso02_url = { /Sito-02, /Sito-02*, /Sito-02/*/ }; // */
+
+DEFINE AR "Caso01"
+    CONDITION
+       http.url is in caso01_url
+       //http.host is "172.21.68.6"
+       net.ipdst is in caso01_ip
+    ACTION
+        TCP.REDIRECT "172.21.68.6:8088"
+    ;
+
+DEFINE AR "Caso02"
+    CONDITION
+       http.url is in caso02_url
+       //http.host is "172.21.68.6"
+       net.ipdst is in caso02_ip
+    ACTION
+        TCP.REDIRECT "172.21.68.6:8089"
+    ;
+
+DEFINE AR "Il Resto"
+    CONDITION
+      net.ipdst is in tuttigli_ip
+    ACTION
+        ANSWER "<h1>Sito in allestimento</h1>"
+    ;
+
+DEFINE VR "log"
+  CONDITION
+      obs.event is net.send
+  ACTION
+        REPORT pippo { 
+      CAT { 
+        "IP source: ", net.ipsrc, "\n",
+        "IP dst: ", net.ipdst, "\n",
+        "Host: ", http.host, ", ", http.method,", ", http.uri,", ", OBS.TIME,
+        "\n"
+        }}
+  ;
+
+// "IP source: ", net.ipsrc ":[0-9]+" "", ". Port source: ",  net.ipsrc "[0-9.]+:" "", 
+//         "IP dst: ", net.ipdst ":[0-9]+" "", ". Port source: ",  net.ipdst "[0-9.]+:" "",
