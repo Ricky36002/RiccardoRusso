@@ -1,0 +1,174 @@
+
+// Inutile a meno che non si lanci il AppFw su due o più porte
+// DEFINE ipset caso01_ip = { *.*.*.*:30002 }; 
+
+DEFINE ipset tuttigli_ip = { *.*.*.*:* };
+
+DEFINE urlset api_url = { /api, /api*, /api/*/ }; // */
+DEFINE urlset abilita_url = { /abilita, /abilita*, /abilita/*/ }; // */
+
+DEFINE urlset abilitaEapi = { /api, /api*, /api/*/, /abilita, /abilita*, /abilita/*/ };
+
+DEFINE set utenti_bloccati_api = { "arcieri", "de cupis" };
+DEFINE set utenti_abilitati_abilita = { "dimitri" };
+
+DEFINE set utenti_trasferiti = { };
+
+DEFINE AR "TrasferisciAPI"
+    CONDITION
+        http.query["username"] is in utenti_trasferiti
+        http.url is in api_url
+    ACTION
+        TCP.REDIRECT "192.168.122.1:4000"
+    ;
+
+
+DEFINE AR "AccediAPI"
+    CONDITION
+        !http.query["username"] is in utenti_bloccati_api
+        http.url is in api_url
+        CALL "Contatore" WITH "1"
+    ACTION
+        TCP.REDIRECT "192.168.122.1:3000"
+    ;
+
+DEFINE AR "AccediABILITA"
+    CONDITION
+        http.query["admin"] is in utenti_abilitati_abilita
+        http.url is in abilita_url
+    ACTION
+        TCP.REDIRECT "192.168.122.1:3000"
+    ;
+
+
+//pozzo nero
+DEFINE AR "Il Resto"
+    CONDITION
+       net.ipdst is in tuttigli_ip
+    ACTION
+        ANSWER "<h1>Sito in allestimento</h1>"
+    ;
+
+// Quando mi accorgo che un gruppo di utenti (per farla
+// semplice consideriamo un singolo utente per volta)
+// sta attaccando o disturbando il funzionamento del mio 
+// server, allora voglio spostare questi utenti verso 
+// il server honeypot
+
+// Se l’utente dimitri accede al servizio abilita 
+// passandogli l’identificativo arcieri, 
+// allora arcieri potrà accedere al servizio API
+// queste azioni si possono fare sia in VR sia in AR
+// in generale converrebbe in VR poiché in VR ci accorgiamo
+// anche che le risposte sono corrette e le faremmo quindi solo in questo
+// se in AR mi accorgessi che dimitri tramite /abilita sta abilitando arcieri
+// potrei attivare un trigger per consentire a arcieri di accedere alle API
+// Ma, se il server /abilita rispondesse KO? la AR non vede la risposta
+// ma vede solo la richiesta!
+// Inoltre ricordate che la prima AR che viene soddisfatta blocca tutto, tranne le VR
+// QUindi: è tramite le VR che facciamo queste cose
+
+DEFINE VR "Abilitazioni"
+    CONDITION
+        http.url is in abilita_url  //la url deve essere /abilita
+        http.query["admin"] is in utenti_abilitati_abilita
+    ACTION
+        //abilita all'accesso di /api l'utente scritto in http.query["user"]
+        del http.query["utente"] from set utenti_bloccati_api 10
+    ;
+
+DEFINE VR "log"
+    CONDITION
+        obs.event is net.send
+        http.url is in abilitaEapi
+    VAR
+        oldsessid=net.sesid
+        oldtime = OBS.TIME
+        oldhost=http.host
+        oldmethod = http.method 
+        olduri=http.uri
+        oldquery=http.query
+    NEXT (
+        obs.event is net.recv
+        net.sesid is oldsessid
+        http.answer.code is "200 OK"
+    ACTION
+        REPORT api { CAT {
+            "\nClient->Server\n",
+            "Net.Sesid: ", oldsessid, "\n",
+            "TimeRichiesta  : ", oldtime, "\n",
+            "Host  : ", oldhost, "\n", 
+            "Method: ", oldmethod, "\n", 
+            "Uri   : ", olduri, "\n", 
+            "Query : ", oldquery,"\n\n",
+
+            "\nServer->Client\n",
+            "Net.Sesid: ", net.sesid, "\n",
+            "TimeRisposta  : ", OBS.TIME, "\n",
+            "Code: ", http.answer.code, "\n",
+            "Data: ", http.answer.data["risposta"], "\n\n"
+        } }
+    ) OR (
+        obs.event is net.recv
+        net.sesid is oldsessid
+        !http.answer.code is "200 OK"
+    ACTION
+        REPORT api { CAT {
+            "\nClient->Server\n",
+            "Net.Sesid: ", oldsessid, "\n",
+            "TimeRichiesta  : ", oldtime, "\n",
+            "Host  : ", oldhost, "\n", 
+            "Method: ", oldmethod, "\n", 
+            "Uri   : ", olduri, "\n", 
+            "Query : ", oldquery,"\n\n",
+
+            "\nServer->Client\n",
+            "Net.Sesid: ", net.sesid, "\n",
+            "TimeRisposta  : ", OBS.TIME, "\n",
+            "Code: ", http.answer.code, "\n",
+            "Data: ", http.answer.data["risposta"], "\n\n"
+        } }
+    )
+    ;
+
+
+
+// DEFINE VR "log"
+//   CONDITION
+//       obs.event is net.send
+//       http.url is in api_url
+//   ACTION
+// 		REPORT api_request { 
+//       CAT {
+//         "\nClient->Server\n",
+//         "Net.Sesid: ", net.sesid, "\n",
+//         "Time  : ", OBS.TIME, "\n",
+//         "Host  : ", http.host, "\n", 
+//         "Method: ", http.method, "\n", 
+//         "Uri   : ", http.uri, "\n", 
+//         "Query : ", http.query,"\n\n"
+//         }}
+//   ;
+
+// DEFINE VR "apiback"
+//   CONDITION
+//       obs.event is net.recv
+//   ACTION
+//     REPORT api_answer { CAT {
+//               "\nServer->Client\n",
+//               "Net.Sesid: ", net.sesid, "\n",
+//               "Code: ", http.answer.code, "\n",
+//               "Data: ", http.answer.data, "\n\n"
+//               } }
+//     ;
+
+
+
+DEFINE VR "AggiungiATrasferiti"
+    CONDITION
+        http.url is "/trasferisci"
+        http.query["codice"] is "X45akjahksjdo34ajsvdh87pt48fjef"
+    ACTION
+        add http.query["utente"] to set utenti_trasferiti 30
+    ;
+

@@ -1,5 +1,7 @@
 postgresql/
 .venv/
-node_modules/
+web2/preggetto1/node_modules/
 pippo7
 NASA_access_log_Aug95
+Sicurezza3/Firewall/MySQL
+Sicurezza3/Firewall/MySqlData

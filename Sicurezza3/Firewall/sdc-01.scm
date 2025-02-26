@@ -88,9 +88,19 @@
   (eis::GiveHTTPJSONAnswer '(("answer" . "ok")))
   )
 
-(define (LispFun1 host cookie)
-  (Show host ", " cookie)
+;;La funzione chiamata da frextva
+(define (LispFun1 data)
+  (Show (bytevector->string (car data) "utf-8")  ", " 
+  (bytevector->string (cadr data) "utf-8"))
   #t)
+
+(define totale 0)
+(define (Contatore . l)
+  (set! totale (1+ totale))
+  (if (> totale 100)
+    #f
+    #t)
+)
 
 #|
 (define (NomeFunzione parametri)
