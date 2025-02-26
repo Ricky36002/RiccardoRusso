@@ -11,9 +11,13 @@ const CustomNavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/users">Users</Nav.Link>
-            <Nav.Link as={Link} to="/posts">Posts</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link>
+            <Nav.Link as={Link} to="/Assenze">Assenze</Nav.Link>
+            <Nav.Link as={Link} to="/Persona">Persona</Nav.Link>
+            <Nav.Link as={Link} to="/Progetto">Progetto</Nav.Link>
+            <Nav.Link as={Link} to="/WP">WP</Nav.Link>
+            <Nav.Link as={Link} to="/AttivitaProgettuali">AttivitaProgetto</Nav.Link>
+            <Nav.Link as={Link} to="/AttivitanonProgettuali">AttivitanonProgettuali</Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

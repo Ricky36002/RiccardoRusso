@@ -1,71 +1,84 @@
-from fastapi import FastAPI, HTTPException, Depends
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
-from pydantic import BaseModel
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+import os
 
-# Creazione del database SQLite
-engine = create_engine("sqlite:///database.db", connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-# Definizione del modello dati
-class Item(Base):
-    __tablename__ = "items"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String, index=True)
+app = Flask(__name__)
+CORS(app)
 
-# Creazione delle tabelle nel database
-Base.metadata.create_all(bind=engine)
+# Configurazione del database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app = FastAPI()
+db = SQLAlchemy(app)
 
-# Dependency Injection per la sessione del database
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Modelli delle tabelle
+class Persona(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    cognome = db.Column(db.String(100), nullable=False)
+    posizione = db.Column(db.String(100), nullable=False)
+    stipendio = db.Column(db.Float, nullable=False)
 
-# Schema Pydantic per validare l'input
-class ItemCreate(BaseModel):
-    name: str
-    description: str
+class Progetto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    inizio = db.Column(db.String(10), nullable=False)
+    fine = db.Column(db.String(10), nullable=False)
+    budget = db.Column(db.Float, nullable=False)
 
-# Endpoint per ottenere tutti gli elementi
-@app.get("/items/")
-def read_items(db: Session = Depends(get_db)):
-    return db.query(Item).all()
+class WP(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    progetto = db.Column(db.Integer, db.ForeignKey('progetto.id'), nullable=False)
+    nome = db.Column(db.String(100), nullable=False)
+    inizio = db.Column(db.String(10), nullable=False)
+    fine = db.Column(db.String(10), nullable=False)
 
-# Endpoint per ottenere un elemento specifico
-@app.get("/items/{item_id}")
-def read_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(Item).filter(Item.id == item_id).first()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return item
+class AttivitaProgetto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    persona = db.Column(db.Integer, nullable=False)
+    progetto = db.Column(db.Integer, db.ForeignKey('progetto.id'), nullable=False)
+    wp = db.Column(db.Integer, db.ForeignKey('wp.id'), nullable=False)
+    giorno = db.Column(db.String(10), nullable=False)
+    tipo = db.Column(db.String(100), nullable=False)
+    oreDurata = db.Column(db.Integer, nullable=False)
 
-# Endpoint per aggiungere un nuovo elemento
-@app.post("/items/")
-def create_item(item: ItemCreate, db: Session = Depends(get_db)):
-    new_item = Item(name=item.name, description=item.description)
-    db.add(new_item)
-    try:
-        db.commit()
-        db.refresh(new_item)
-        return new_item
-    except:
-        db.rollback()
-        raise HTTPException(status_code=500, detail="Error while creating item")
+class Attivitanonprogettuale(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    persona = db.Column(db.Integer, nullable=False)
+    tipo = db.Column(db.String(100), nullable=False)
+    giorno = db.Column(db.String(10), nullable=False)
+    oreDurata = db.Column(db.Integer, nullable=False)
 
-# Endpoint per eliminare un elemento
-@app.delete("/items/{item_id}")
-def delete_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(Item).filter(Item.id == item_id).first()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    db.delete(item)
-    db.commit()
-    return {"message": "Item deleted"}
+class Assenza(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    persona = db.Column(db.Integer, db.ForeignKey('persona.id'), nullable=False)
+    tipo = db.Column(db.String(100), nullable=False)
+    giorno = db.Column(db.String(10), nullable=False)
+
+# Funzione per generare endpoint GET per ogni tabella
+def create_get_all_endpoint(route, model):
+    @app.route(route, methods=['GET'], endpoint=f"get_all_{model.__name__}")
+    def get_all():
+        records = model.query.all()
+        result = []
+        for record in records:
+            record_dict = {}
+            for column in model.__table__.columns:
+                record_dict[column.name] = getattr(record, column.name)
+            result.append(record_dict)
+        print(jsonify(result))
+        return jsonify(result)
+
+# Creazione dinamica degli endpoint GET
+create_get_all_endpoint('/Persona', Persona)
+create_get_all_endpoint('/Progetto', Progetto)
+create_get_all_endpoint('/WP', WP)
+create_get_all_endpoint('/AttivitaProgettuali', AttivitaProgetto)
+create_get_all_endpoint('/AttivitanonProgettuali', Attivitanonprogettuale)
+create_get_all_endpoint('/Assenze', Assenza)
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8080)
