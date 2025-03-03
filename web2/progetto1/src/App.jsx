@@ -6,7 +6,7 @@ import Persona from './components/Persona';
 import Progetto from './components/Progetto';
 import WP from './components/WP';
 import Assenze from './components/Assenze';
-import AttivitaProgetto from './components/AttivitaProgettuali';
+// import AttivitaProgetto from './components/AttivitaProgettuali';
 import AttivitanonProgettuali from './components/AttivitanonProgettuali';
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/Progetto" element={<Progetto />} />
         <Route path="/WP" element={<WP />} />
         <Route path="/Assenze" element={<Assenze />} />
-        <Route path="/AttivitaProgettuali" element={<AttivitaProgetto />} />
+        {/* <Route path="/AttivitaProgettuali" element={<AttivitaProgetto />} /> */}
         <Route path="/AttivitanonProgettuali" element={<AttivitanonProgettuali />} />
         
       </Routes>

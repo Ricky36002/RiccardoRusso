@@ -76,7 +76,7 @@ def create_get_all_endpoint(route, model):
 create_get_all_endpoint('/Persona', Persona)
 create_get_all_endpoint('/Progetto', Progetto)
 create_get_all_endpoint('/WP', WP)
-create_get_all_endpoint('/AttivitaProgettuali', AttivitaProgetto)
+# create_get_all_endpoint('/AttivitaProgettuali', AttivitaProgetto)
 create_get_all_endpoint('/AttivitanonProgettuali', Attivitanonprogettuale)
 create_get_all_endpoint('/Assenze', Assenza)
 
